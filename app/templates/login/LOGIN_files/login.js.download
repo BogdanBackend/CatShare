@@ -1,0 +1,75 @@
+let myPix = [
+    "LOGIN_files/cat_login.webp"
+];
+
+window.onload = function () {
+    if (document.cookie !== "") {
+        document.cookie.split("; ").forEach(element => {
+            let cookie = element.split("=");
+
+            if (cookie[0] === "lastLogin") {
+                document.getElementById("loginInput").value = cookie[1];
+            }
+        });
+    }
+
+    choosePic();
+}
+
+function showPassword() {
+    let x = document.getElementById("inputPassword");
+    let icon = document.getElementById("passwordVisible");
+
+    if (x.type === "password") {
+        x.type = "text";
+
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+    } else { // if type === text
+        x.type = "password";
+
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+    }
+}
+
+function choosePic() {
+    let randomNum = Math.floor(Math.random() * myPix.length);
+
+    document.getElementById("login-pic").src = myPix[randomNum];
+}
+
+function loginError() {
+    let errorBlock = document.getElementById("loginError");
+    let loginInput = document.getElementById("loginInput");
+    let passwordInput = document.getElementById("passwordInput");
+
+    errorBlock.style.display = "flex";
+
+    loginInput.classList.add("error");
+    passwordInput.classList.add("error");
+    $("#spinner-container").addClass('hide');
+    $("#login-button").removeClass('hide');
+}
+
+$(".user-input").click(function () {
+    this.classList.remove('error');
+});
+
+$("form").submit(function (e) {
+    e.preventDefault();
+    document.getElementById('loginInput').value =  document.getElementById('loginInput').value.trim();
+    $("#login-button").addClass('hide');
+    $("#spinner-container").removeClass('hide');
+
+    e.currentTarget.submit();
+
+    // let formRequest = `text=${$("#loginInput").val()}&password=${$("#inputPassword").val()}`;
+
+    // let xhr = new XMLHttpRequest();
+
+    // xhr.open("POST", "http://" + window.location.host + "/login");
+    // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    // xhr.send(formRequest);
+});
