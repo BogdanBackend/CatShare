@@ -21,3 +21,4 @@ if __name__ == '__main__':
 
     icon = create_icon(close)
     icon.run()
+print('sd')

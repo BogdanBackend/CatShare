@@ -2,9 +2,7 @@
 
 from pyautogui import locateCenterOnScreen, moveTo, click
 from time import sleep
-# from ..tools import href
-from os import path
-def href(*args): return path.join(path.dirname(path.abspath(__file__)), *args)
+from ..tools import href
 
 def _click_button(button_name:str, x=0, y=0) -> bool:
     sleep(0.5)
@@ -30,8 +28,8 @@ def _board(board_name:str,  x=0, y=0) -> bool:
     return res
 
 def board_nano() -> bool: return _board('Nano', y=20)
-def board_uno() -> bool:  return _board('Uno')
+def board_uno()  -> bool: return _board('Uno')
 def board_mega() -> bool: return _board('Mega')    
 
 
-# TODO: Port, href, nano
+# TODO: Port, nano
